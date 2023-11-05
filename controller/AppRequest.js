@@ -20,7 +20,7 @@ router.get('/getRequestById/:id',async (req,res)=>{
 //Activities Endpoint
   router.get('/getActivities',async(req,res)=>{
     try {
-        const activities = await BloodLettingActivityModel.find({});
+        const activities = await BloodLettingActivityModel.find({}).populate('bloodCenter');
         if(activities){
             res.status(200).json(activities);
         }
