@@ -9,16 +9,19 @@ router.post('/login',async(req,res)=>{
         const {email,password} = req.body
     
             const user = await DonorAccountModel.findOne({email}).populate('userId');
+            console.log("ASdasdasdsads");
             if(user && (await bcrypt.compare(password, user.password))){
                 const payload = {
                     accountId: user._id,
                     userRoles: user.userRoles,
                     userId:user.userId._id,
+              
                 
                 }
                 res.json({
                     _id:user._id,
                     email:user.email,
+                    name:user.userId.firstName,
                     token:generateToken(payload)
                 })
             }
