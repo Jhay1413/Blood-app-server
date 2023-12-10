@@ -11,7 +11,7 @@ const PhysicianModel = require('../model/Physician');
 router.get('/getRequestById/:id',async (req,res)=>{
     try {
         const id = req.params.id
-        const allRequestData = await PatientRequestModel.findById(id).populate('patient').populate('physician').populate('approvedBy');
+        const allRequestData = await PatientRequestModel.findOne({requestId:id}).populate('patient').populate('physician').populate('approvedBy');
         res.status(200).json(allRequestData)
     } catch (error) {
       console.log(error)
